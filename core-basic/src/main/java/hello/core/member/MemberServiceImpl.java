@@ -1,5 +1,12 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+// 기본적으로 클래스명 맨앞글자 소문자 바뀐 이름이 빈 이름으로 등록된다.
+// 빈 이름을 변경할 수도 있다.
+// 구현체에 @Component 어노테이션을 붙여야 한다.
+@Component("memberServiceImpl")
 public class MemberServiceImpl implements MemberService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -15,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
      */
     private final MemberRepository memberRepository;
 
+    @Autowired // 컨테이너에서 빈을 찾아서 의존성을 주입해준다.
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
@@ -28,4 +36,10 @@ public class MemberServiceImpl implements MemberService {
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId);
     }
+
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
 }
+
+
