@@ -22,6 +22,12 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    /*
+        - 생성자 의존성 주입
+            1. 생성자 호출 시점에 딱 1번만 호출
+            2. 불변, 필수
+            3. 생성자가 딱 1개만 있으면 @Autowired 생략 가능
+     */
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
