@@ -29,7 +29,7 @@ public class ComponentFilterAppConfigTest {
 		// 컴포넌트 스캔에서 제외할 대상을 지정
 		excludeFilters = {
 			@Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class),
-			@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BeanA.class)
+			@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BeanB.class)
 		}
 		/*
 			# FilterType

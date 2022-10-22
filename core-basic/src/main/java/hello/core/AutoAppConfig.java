@@ -24,10 +24,10 @@ public class AutoAppConfig {
 	// 수동 빈 등록 vs 자동 빈 등록 => 수동 빈 등록이 우선권을 가진다. (수동빈이 자동빈을 오버라이딩 한다.)
 	// 스프링 부트에선 기본적으로 오버라이딩을 시키지 않고 예외를 발생시킨다.
 	// 어설프게 하면 매우 잡기 어려운 버그가 발생해서 명확하게 하거나 빨리 에러를 내서 튕겨내거나 하는 것을 권장한다.
-	@Bean(name = "memoryMemberRepository")
-	MemberRepository memberRepository() {
-		return new MemoryMemberRepository();
-	}
+	// @Bean(name = "memoryMemberRepository")
+	// MemberRepository memberRepository() {
+	// 	return new MemoryMemberRepository();
+	// }
 }
 
 /*
