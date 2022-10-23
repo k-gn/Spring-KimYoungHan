@@ -19,6 +19,7 @@ public class BeanLifeCycle {
 	@Configuration
 	static class LifeCycleConfig {
 
+//		@Bean(initMethod = "init")//, destroyMethod = "close")
 		@Bean
 		public NetworkClients networkClient() {
 			NetworkClients networkClient = new NetworkClients();
