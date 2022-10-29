@@ -49,6 +49,7 @@ public class NetworkClients { // implements InitializingBean, DisposableBean {
 			  -> 따라서 따로 지정해주지 않아도 알아서 잘 동작한다. (@Bean 으로 사용 시에만 동작)
 
 			- 일반적으로 종료는 close 란 이름을 많이 쓴다. (AutoCloseable 를 구현하여 활용 가능)
+
 		3. @PostConstruct, @PreDestroy 애노테이션 지원
 			- 결론은 이 방법을 쓰면 된다!
 			- 최신 스프링에서 가장 권장한다.
