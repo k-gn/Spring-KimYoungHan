@@ -11,6 +11,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class InterfaceProxyConfig {
 
+    /*
+        스프링 컨테이너에 프록시 객체가 등록된다.
+
+        실제 객체는 이제 스프링 컨테이너와 상관이 없고, 단지 프록시 객체에게 참조되고 있다.
+
+        원본 클래스를 수정하지 않고 로그 추적기를 적용할 수 있다.
+     */
     @Bean
     public OrderControllerV1 orderController(LogTrace logTrace) {
         OrderControllerV1Impl controllerImpl = new OrderControllerV1Impl(orderService(logTrace));

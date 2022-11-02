@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Proxy;
 
+/*
+    메서드 이름을 기준으로 특정 조건을 만족할 때만 로그를 남기는 기능
+ */
 @Configuration
 public class DynamicProxyFilterConfig {
 

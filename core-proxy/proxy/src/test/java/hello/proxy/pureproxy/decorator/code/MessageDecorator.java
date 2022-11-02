@@ -5,6 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MessageDecorator implements Component {
 
+    /*
+        데코레이터는 Component 를 가지고 있어야 하는 중복이 있다.
+        따라서 인터페이스가 아닌 해당 정보를 가지고 있는 추상클래스를 만드는 방법을 생각해볼 수 있다.
+     */
     private Component component;
 
     public MessageDecorator(Component component) {

@@ -19,6 +19,16 @@ public class LogTraceFilterHandler implements InvocationHandler {
         this.patterns = patterns;
     }
 
+    /*
+        특정 메서드 이름이 매칭 되는 경우에만 LogTrace 로직을 실행한다.
+        이름이 매칭되지 않으면 실제 로직을 바로 호출한다.
+
+        스프링이 제공하는 PatternMatchUtils.simpleMatch(..) 를 사용하면 단순한 매칭 로직을 쉽게 적용할 수 있다.
+        xxx : xxx가 정확히 매칭되면 참
+        xxx* : xxx로 시작하면 참
+        *xxx : xxx로 끝나면 참
+        *xxx* : xxx가 있으면 참
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
