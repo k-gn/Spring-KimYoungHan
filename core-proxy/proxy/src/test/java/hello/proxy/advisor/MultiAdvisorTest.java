@@ -38,6 +38,8 @@ public class MultiAdvisorTest {
 
     }
 
+    // 결과적으로 여러 프록시를 사용할 때와 비교해서 결과는 같고, 성능은 더 좋다.
+    // 하나의 target 에 여러 AOP가 동시에 적용되어도, 스프링의 AOP는 target 마다 하나의 프록시만 생성한다.
     @Test
     @DisplayName("하나의 프록시, 여러 어드바이저")
     void multiAdvisorTest2() {
@@ -50,6 +52,7 @@ public class MultiAdvisorTest {
         ServiceInterface target = new ServiceImpl();
         ProxyFactory proxyFactory1 = new ProxyFactory(target);
 
+        // 실행될 순서대로 넣어주기
         proxyFactory1.addAdvisor(advisor2);
         proxyFactory1.addAdvisor(advisor1);
         ServiceInterface proxy = (ServiceInterface) proxyFactory1.getProxy();
