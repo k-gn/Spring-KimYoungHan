@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Import;
 @Import({AppV1Config.class, AppV2Config.class})
 public class BeanPostProcessorConfig {
 
+    // 빈 후처리기를 통해 기존의 프록시를 생성하는 코드가 필요 없어졌다.
     @Bean
     public PackageLogTracePostProcessor logTracePostProcessor(LogTrace logTrace) {
         return new PackageLogTracePostProcessor("hello.proxy.app", getAdvisor(logTrace));
