@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 
+// 순서를 보장받으려면 클래스 단위로 Aspect 를 분리해야 한다.
 @Slf4j
 public class AspectV5Order {
 
