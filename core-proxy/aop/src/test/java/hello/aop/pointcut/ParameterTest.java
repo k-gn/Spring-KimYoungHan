@@ -44,7 +44,7 @@ public class ParameterTest {
             return joinPoint.proceed();
         }
 
-        @Around("allMember() && args(arg,..)")
+        @Around("allMember() && args(arg,..)") // 인자를 받을 수 있다.
         public Object logArgs2(ProceedingJoinPoint joinPoint, Object arg) throws Throwable {
             log.info("[logArgs2]{}, arg={}", joinPoint.getSignature(), arg);
             return joinPoint.proceed();
@@ -55,12 +55,12 @@ public class ParameterTest {
             log.info("[logArgs3] arg={}", arg);
         }
 
-        @Before("allMember() && this(obj)")
+        @Before("allMember() && this(obj)") // 프록시 객체
         public void thisArgs(JoinPoint joinPoint, MemberService obj) {
             log.info("[this]{}, obj={}", joinPoint.getSignature(), obj.getClass());
         }
 
-        @Before("allMember() && target(obj)")
+        @Before("allMember() && target(obj)") // 실제 구현체
         public void targetArgs(JoinPoint joinPoint, MemberService obj) {
             log.info("[target]{}, obj={}", joinPoint.getSignature(), obj.getClass());
         }

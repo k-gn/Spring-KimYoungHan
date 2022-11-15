@@ -28,6 +28,7 @@ public class AtAnnotationTest {
     @Aspect
     static class AtAnnotationAspect {
 
+        // 주어진 애노테이션을 가지고 있는 조인 포인트를 매칭
         @Around("@annotation(hello.aop.member.annotation.MethodAop)")
         public Object doAtAnnotation(ProceedingJoinPoint joinPoint) throws Throwable {
             log.info("[@annotation] {}", joinPoint.getSignature());
@@ -36,3 +37,5 @@ public class AtAnnotationTest {
 
     }
 }
+
+// @args : 전달된 인수의 런타임 타입에 애노테이션이 있는 경우 매칭

@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// 부모타입 허용 / 실제 넘어온 파라미터 객체 인스턴스롤 보고 판단
 public class ArgsTest {
 
     Method helloMethod;
@@ -43,7 +44,7 @@ public class ArgsTest {
 
     /**
      * execution(* *(java.io.Serializable)): 메서드의 시그니처로 판단 (정적)
-     * args(java.io.Serializable): 런타임에 전달된 인수로 판단 (동적)
+     * args(java.io.Serializable): 런타임에 전달된 인수로 판단 (동적) ( 단독으로는 잘 안쓰인다 )
      */
     @Test
     void argsVsExecution() {
@@ -55,7 +56,7 @@ public class ArgsTest {
         assertThat(pointcut("args(Object)")
                 .matches(helloMethod, MemberServiceImpl.class)).isTrue();
 
-        //Execution
+        //Execution (부모타입 허용 안함)
         assertThat(pointcut("execution(* *(String))")
                 .matches(helloMethod, MemberServiceImpl.class)).isTrue();
         assertThat(pointcut("execution(* *(java.io.Serializable))") //매칭 실패

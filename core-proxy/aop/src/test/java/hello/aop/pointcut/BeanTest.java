@@ -25,6 +25,7 @@ public class BeanTest {
 
     @Aspect
     static class BeanAspect {
+        // 해당 빈에 메소드에 적용
         @Around("bean(orderService) || bean(*Repository)")
         public Object doLog(ProceedingJoinPoint joinPoint) throws Throwable {
             log.info("[bean] {}", joinPoint.getSignature());

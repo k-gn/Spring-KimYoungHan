@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// 특정 타입이 매칭되면 그 안의 메서드들이 자동으로 매칟된다.
 public class WithinTest {
 
     AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
