@@ -17,6 +17,7 @@ class CallServiceV3Test {
 
     @Test
     void external() {
+        System.out.println(callServiceV3.getClass());
         callServiceV3.external();
     }
 

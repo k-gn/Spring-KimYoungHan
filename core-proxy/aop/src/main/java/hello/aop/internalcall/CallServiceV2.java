@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 public class CallServiceV2 {
 
 //    private final ApplicationContext applicationContext;
+    // 지연조회하기
+    // 객체를 스프링 컨테이너에서 조회하는 것을 스프링 빈 생성 시점이 아니라 실제 객체를 사용하는 시점으로 지연
     private final ObjectProvider<CallServiceV2> callServiceProvider;
 
     public CallServiceV2(ObjectProvider<CallServiceV2> callServiceProvider) {
