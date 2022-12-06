@@ -1,0 +1,12 @@
+jpabook/jpashop/domain/Item.java
+ jpabook.jpashop.domain.Item
+jpabook/jpashop/JpaMain.java
+ jpabook.jpashop.JpaMain
+jpabook/jpashop/domain/OrderStatus.java
+ jpabook.jpashop.domain.OrderStatus
+jpabook/jpashop/domain/OrderItem.java
+ jpabook.jpashop.domain.OrderItem
+jpabook/jpashop/domain/Member.java
+ jpabook.jpashop.domain.Member
+jpabook/jpashop/domain/Order.java
+ jpabook.jpashop.domain.Order
