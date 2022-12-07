@@ -5,21 +5,27 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @Entity
-// @Table(indexes = @Index()) // 인덱스도 넣을 수 있다.
-public class Member {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+// @Table(indexes = @Index()) // 인덱스도넣을 수 있다.
+public class Member extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,8 +43,4 @@ public class Member {
 
 	@OneToMany(mappedBy = "member")
 	private List<Order> orders = new ArrayList<>();
-
-	@OneToOne
-	@JoinColumn(name = "LOCKER_ID")
-	private Locker locker;
 }

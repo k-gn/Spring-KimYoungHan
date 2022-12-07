@@ -55,6 +55,7 @@ public class Member {
 			- 기본키 제약조건 : null 이 아니며 유일하고 변하면 안됨
 			- 제약조건을 만족하는 키를 찾기 어렵다. -> 대체키 사용
 			- Long 형 + 대체키(rule) + 키 생성 전략을 조합하여 사용 권장
+			- INSERT 후 객체에 자동으로 키값이 세팅된다.
 	*/
 	private Long id;
 

@@ -1,16 +1,29 @@
 package jpabook.jpashop.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @Entity
-public class Item {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn
+public abstract class Item extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,4 +35,7 @@ public class Item {
 	private int price;
 
 	private int stockQuantity;
+
+	@ManyToMany(mappedBy = "items")
+	private List<Category> categories = new ArrayList<>();
 }

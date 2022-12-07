@@ -11,6 +11,9 @@
         <class>jpabook.jpashop.domain.Item</class>
         <class>jpabook.jpashop.test.Team</class>
         <class>jpabook.jpashop.test.Users</class>
+        <class>jpabook.jpashop.domain.Locker</class>
+        <class>jpabook.jpashop.domain.Category</class>
+        <class>jpabook.jpashop.domain.Delivery</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
@@ -25,7 +28,7 @@
             <property name="hibernate.use_sql_comments" value="true"/>
             <property name="hibernate.jdbc.batch_size" value="10"/>
             <property name="hibernate.order_inserts" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
 
     </persistence-unit>
