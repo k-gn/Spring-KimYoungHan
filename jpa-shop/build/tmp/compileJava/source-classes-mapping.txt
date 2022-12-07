@@ -1,12 +1,18 @@
 jpabook/jpashop/domain/Item.java
  jpabook.jpashop.domain.Item
-jpabook/jpashop/JpaMain.java
- jpabook.jpashop.JpaMain
-jpabook/jpashop/domain/OrderStatus.java
- jpabook.jpashop.domain.OrderStatus
 jpabook/jpashop/domain/OrderItem.java
  jpabook.jpashop.domain.OrderItem
-jpabook/jpashop/domain/Member.java
- jpabook.jpashop.domain.Member
+jpabook/jpashop/domain/OrderStatus.java
+ jpabook.jpashop.domain.OrderStatus
+jpabook/jpashop/JpaMain.java
+ jpabook.jpashop.JpaMain
 jpabook/jpashop/domain/Order.java
  jpabook.jpashop.domain.Order
+jpabook/jpashop/test/Team.java
+ jpabook.jpashop.test.Team
+jpabook/jpashop/domain/Member.java
+ jpabook.jpashop.domain.Member
+jpabook/jpashop/test/Users.java
+ jpabook.jpashop.test.Users
+jpabook/jpashop/JpaTestMain.java
+ jpabook.jpashop.JpaTestMain
