@@ -14,6 +14,10 @@ public class JpaMain {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
+		Integer a = 10;
+		a = 20;
+		System.out.println("a = " + a);
+
 		try {
 			tx.commit();
 		} catch (Exception e) {

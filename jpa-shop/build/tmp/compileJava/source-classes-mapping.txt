@@ -1,26 +1,34 @@
-jpabook/jpashop/domain/Item.java
- jpabook.jpashop.domain.Item
+jpabook/jpashop/test/Users.java
+ jpabook.jpashop.test.Users
 jpabook/jpashop/test/Team.java
  jpabook.jpashop.test.Team
 jpabook/jpashop/domain/OrderStatus.java
  jpabook.jpashop.domain.OrderStatus
-jpabook/jpashop/JpaMain.java
- jpabook.jpashop.JpaMain
-jpabook/jpashop/domain/Locker.java
- jpabook.jpashop.domain.Locker
-jpabook/jpashop/domain/DeliveryStatus.java
- jpabook.jpashop.domain.DeliveryStatus
-jpabook/jpashop/domain/Delivery.java
- jpabook.jpashop.domain.Delivery
 jpabook/jpashop/JpaTestMain.java
  jpabook.jpashop.JpaTestMain
+jpabook/jpashop/domain/DeliveryStatus.java
+ jpabook.jpashop.domain.DeliveryStatus
+jpabook/jpashop/domain/Book.java
+ jpabook.jpashop.domain.Book
+jpabook/jpashop/domain/Item.java
+ jpabook.jpashop.domain.Item
+jpabook/jpashop/domain/Order.java
+ jpabook.jpashop.domain.Order
+jpabook/jpashop/domain/Delivery.java
+ jpabook.jpashop.domain.Delivery
+jpabook/jpashop/domain/Album.java
+ jpabook.jpashop.domain.Album
+jpabook/jpashop/domain/BaseEntity.java
+ jpabook.jpashop.domain.BaseEntity
 jpabook/jpashop/domain/Member.java
  jpabook.jpashop.domain.Member
 jpabook/jpashop/domain/OrderItem.java
  jpabook.jpashop.domain.OrderItem
+jpabook/jpashop/domain/Movie.java
+ jpabook.jpashop.domain.Movie
 jpabook/jpashop/domain/Category.java
  jpabook.jpashop.domain.Category
-jpabook/jpashop/test/Users.java
- jpabook.jpashop.test.Users
-jpabook/jpashop/domain/Order.java
- jpabook.jpashop.domain.Order
+jpabook/jpashop/JpaMain.java
+ jpabook.jpashop.JpaMain
+jpabook/jpashop/TestMain.java
+ jpabook.jpashop.TestMain
