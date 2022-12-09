@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
+// 테스트에선 트랜잭션 시 자동으로 롤백된다. @Rollback(false) 를 사용하여 롤백이 안되게 할 수 있다.
 public class MemberServiceTest {
 
     @Autowired MemberService memberService;

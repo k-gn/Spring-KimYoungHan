@@ -10,9 +10,10 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-#        show_sql: true
+#        show_sql: true # sysout
         format_sql: true
 
+# 운영 환경에선 로그로 찍어야한다.
 logging.level:
-  org.hibernate.SQL: debug
-#  org.hibernate.type: trace
+  org.hibernate.SQL: debug # log
+#  org.hibernate.type: trace # query param 보이기
