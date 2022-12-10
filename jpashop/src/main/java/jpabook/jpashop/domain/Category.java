@@ -1,6 +1,7 @@
 package jpabook.jpashop.domain;
 
 import jpabook.jpashop.domain.item.Item;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,12 +21,13 @@ public class Category {
 
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "category_item",
+    @ManyToMany //실무에선 다대다를 쓰면 안된다. (직접 중간테이블을 만들어 푼다.)
+    @JoinTable(name = "category_item", //중간테이블 매핑
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items = new ArrayList<>();
 
+    //--자기 자신과 양방향 연관관계
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;

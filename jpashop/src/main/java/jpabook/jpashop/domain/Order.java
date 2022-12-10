@@ -24,6 +24,8 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+    // 가급적 모든 연관관계는 일단 지연로딩으로 설정하자. (즉시로딩은 예측과 추적이 어렵고 jpql에서 N+1 이슈가 자주 일어난다.)
+    // 연관된 엔티티를 함께 조회해야 하면 fetch join 이나 엔티티그래프 기능을 사용한다.
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -32,17 +34,45 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    /*
+         Hibernate 에서는 양방향 OneToOne 관계에서는 지연로딩이 동작하지 않는다.
+         정확하게는 테이블을 조회할 때 외래 키를 갖고 있는 테이블(연관 관계의 주인)에서는 지연로딩이 동작하지만,
+         mappedBy로 연결된 반대편 테이블은 지연로딩이 동작하지 않고 N + 1 쿼리가 발생한다.
+         ->  JPA의 구현체인 Hibernate 에서 프록시 기능의 한계로 지연 로딩을 지원하지 못하기 때문에 발생
+
+         DB에 있는 테이블은 연관관계의 주인이 아니기 때문에 외래 키를 관리하지 않기 때문에 외래키 필드는 존재하지 않는다. (null)
+         프록시 객체를 만들기 위해서는 연관 객체에 값이 있는지 없는지 알아야 한다.
+         연관관계의 주인이 아닌 테이블에선 주인의 값을 알기 위해 무조건 조회를 해야한다.
+
+         반면 @OneToMany 관계는 빈 컬렉션이 초기화될 때(new ArrayList<>() 할 때) Proxy가 생긴다.
+         null이 아니고 size 자체가 0일 수 있는 것이기 때문에 @OneToMany 관계는 @OneToOne과 다르게 Lazy Loading이 가능하다.
+
+         ---
+
+         cascade - 생명주기를 주 테이블과 동일하게 하기
+     */
     @JsonIgnore
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
+    /*
+        하이버네이트 기본 매핑 전략 : SpringPhysicalNamingStrategy
+            1. 카멜케이스 -> 언더스코어
+            2. . -> _
+            3. 대문자 -> 소문자
+
+        네이밍 전략은 따로 수정해줄 수 있다.
+
+        논리명 : 명시적으로 컬럼, 테이블명을 적지 않으면 ImplicitNamingStrategy
+        물리명 : 모든 논리명에 적용 + 실제 테이블에 적용 (회사룰로 바꿀 수 있다)
+     */
     private LocalDateTime orderDate; //주문시간
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문상태 [ORDER, CANCEL]
 
-    //==연관관계 메서드==//
+    //==연관관계 설정 메서드 - 객체지향적으로 양쪽에 매핑해주는게 좋다.==//
     public void setMember(Member member) {
         this.member = member;
         member.getOrders().add(this);
