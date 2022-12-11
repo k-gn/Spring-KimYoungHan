@@ -96,7 +96,7 @@ public class Order {
     // 이런식의 주문 생성 같은 기능은 주문 객체가 가지고 있는 것이 관리하기 좋다.
     // 실제로 이런 생성메소드는 더 복잡할 수 있다.
     // 인스턴스 멤버를 사용하지 않는다면 static 을 선언하는 것을 고려하자 (new 로 생성없이 사용 가능하고, 속도도 더 빠름)
-    // static은 전역적으로 쉽게 재사용하는 멤버나 잘 변하지 않는 변수나, 메소드를 사용할때 주로 사용
+    // static은 전역적으로 쉽게 재사용하는 멤버나 잘 변하지 않는 변수나, 메소드를 사용할때 주로 사용 - 사용성이 좋다.
     // 단, static영역을 너무 자주 사용하면 GC가 관리 하지 않기에 과부하를 일으킬 수 있다.
     //==생성 메서드==//
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {

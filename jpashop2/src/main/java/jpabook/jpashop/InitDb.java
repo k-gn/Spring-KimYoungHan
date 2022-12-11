@@ -24,7 +24,7 @@ public class InitDb {
 
     private final InitService initService;
 
-    @PostConstruct
+    @PostConstruct // 의존성 주입이 이루어진 후 초기화를 수행
     public void init() {
         initService.dbInit1();
         initService.dbInit2();

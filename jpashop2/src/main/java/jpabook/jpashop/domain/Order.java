@@ -56,6 +56,10 @@ public class Order {
     }
 
     //==생성 메서드==//
+    // static : Static이란 키워드는 메모리에 한번 할당되어 프로그램이 종료될 때 해제되는 것
+    // static영역에 할당된 메모리는 모든 객체가 공유 (static은 새로운 메모리에 할당하지 않고 한 메모리에 계속 재사용)
+    // static 변수는 전역 속성이라 공통적인 값 or 고정적인 상수에 사용
+    // static 메소드는 객체생성 없이 사용 가능해서 편리하고, 호출 속도가 더 빠르다.
     public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
         Order order = new Order();
         order.setMember(member);
