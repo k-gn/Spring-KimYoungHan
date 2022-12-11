@@ -44,6 +44,9 @@ public class MemberService {
 
     /**
      * 회원 수정
+     *
+     * 수정된 멤버 객체를 반환하는 구조라면 변경성 메소드에서 -> update + select 하는 꼴이 되버려서 철저한 분리를 목적으로 한다면 어울리지 않음
+     * 따라서 id 정도만 반환하는게 아니라면 딱 update 만 해주고 끝내는게 좋다. (사실 개발자 스타일마다 갈리긴함)
      */
     @Transactional
     public void update(Long id, String name) {
