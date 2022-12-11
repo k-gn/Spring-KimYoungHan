@@ -120,9 +120,11 @@ public class Order {
             throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
         }
 
+        System.out.println("---주문 상태 삭제로 변경---");
         this.setStatus(OrderStatus.CANCEL);
         for (OrderItem orderItem : orderItems) {
             // 주인이 아닌곳에서 관계 자체가 아닌 값을 수정하는 건 가능한듯
+            System.out.println("---주문 상품 삭제 시작---");
             orderItem.cancel();
         }
     }

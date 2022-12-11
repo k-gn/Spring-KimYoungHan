@@ -44,12 +44,7 @@ public class OrderItem {
     }
 
     //==비즈니스 로직==//
-
-    /**
-     * 재고수량 원복
-     */
     public void cancel() {
-        System.out.println("---재고 수량 원복---");
         getItem().addStock(count);
     }
 
