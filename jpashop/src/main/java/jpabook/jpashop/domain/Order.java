@@ -72,9 +72,13 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문상태 [ORDER, CANCEL]
 
-    //==연관관계 설정 메서드 - 객체지향적으로 양쪽에 매핑해주는게 좋다.==//
+    //==연관관계 설정 메서드 - 순수 객체지향적으로 양쪽에 매핑해주는게 좋다. (양방향 관계에서 두쪽다 들어가는게 당연하긴함)==//
+    // 사람이기 때문에 연관관계 로직을 까먹을 수 있어서 이런 메소드를 만드는 것을 권장한다.
+    // 사실 getter setter 관례 때문에 어떠한 로직이 같이 있다면 set 보단 changeMember 같은 이름이 더 적절하다.
+    // 1에 만들지 n에 만들지는 상황마다 다르다. (양쪽에 같이 만들면 문제가 발생할 수 있다.)
     public void setMember(Member member) {
         this.member = member;
+        // 컬렉션에 넣을 때 중복된 값 검증 등의 로직이 필요할 수 있다.
         member.getOrders().add(this);
     }
 
