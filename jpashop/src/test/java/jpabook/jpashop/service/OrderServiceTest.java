@@ -19,9 +19,10 @@ import javax.persistence.EntityManager;
 
 import static org.junit.Assert.*;
 
+// 사실 이런 통합 테스트 보다 순수하게 메소드 자체만 테스트하는 단위테스트가 좋다.
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
+@Transactional // 스코프는 메소드별 (각 메소드가 끝나면 롤백)
 public class OrderServiceTest {
 
     @Autowired EntityManager em;

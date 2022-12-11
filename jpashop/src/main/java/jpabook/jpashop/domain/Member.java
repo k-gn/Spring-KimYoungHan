@@ -36,7 +36,7 @@ public class Member {
             - 가급적 컬렉션 생성 후 바꾸지말자
      */
     @JsonIgnore
-    @OneToMany(mappedBy = "member") // 주인이 아닌곳에선 읽기전용이 된다.
+    @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
 }

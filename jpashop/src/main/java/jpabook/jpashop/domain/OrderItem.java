@@ -44,6 +44,10 @@ public class OrderItem {
     }
 
     //==비즈니스 로직==//
+
+    /**
+     * 재고수량 원복
+     */
     public void cancel() {
         getItem().addStock(count);
     }

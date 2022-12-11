@@ -30,8 +30,8 @@ public class OrderRepository {
 
     public List<Order> findAllByString(OrderSearch orderSearch) {
 
-            String jpql = "select o from Order o join o.member m";
-            boolean isFirstCondition = true;
+        String jpql = "select o from Order o join o.member m";
+        boolean isFirstCondition = true;
 
         //주문 상태 검색
         if (orderSearch.getOrderStatus() != null) {
@@ -56,7 +56,7 @@ public class OrderRepository {
         }
 
         TypedQuery<Order> query = em.createQuery(jpql, Order.class)
-                .setMaxResults(1000);
+                .setMaxResults(1000); // 최대 1000건
 
         if (orderSearch.getOrderStatus() != null) {
             query = query.setParameter("status", orderSearch.getOrderStatus());
@@ -69,12 +69,12 @@ public class OrderRepository {
     }
 
     /**
-     * JPA Criteria
+     * JPA Criteria (동적 쿼리에 좋지만 보기도 어렵고 유지보수가 최악이라 안쓴다.) -> QueryDSL!
      */
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Order> cq = cb.createQuery(Order.class);
-        Root<Order> o = cq.from(Order.class);
+        CriteriaQuery<Order> cq = cb.createQuery(Order.class); // 응답 타입 설정
+        Root<Order> o = cq.from(Order.class); // 별칭 설정
         Join<Object, Object> m = o.join("member", JoinType.INNER);
 
         List<Predicate> criteria = new ArrayList<>();
