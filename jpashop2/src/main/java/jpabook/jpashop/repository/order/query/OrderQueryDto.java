@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(of = "orderId")
+@EqualsAndHashCode(of = "orderId") // orderId 를 기준으로 재정의
 public class OrderQueryDto {
 
     private Long orderId;
