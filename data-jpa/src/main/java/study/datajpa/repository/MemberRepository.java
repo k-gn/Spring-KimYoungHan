@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import org.springframework.transaction.annotation.Transactional;
 import study.datajpa.entity.Member;
 
 /*
@@ -158,7 +159,86 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	    List<Member> findTop3By();
 
 		** 개발간 p6 라이브러리로 jpa 쿼리의 값들을 편하게 볼 수 있다.
+	 */
 
+	/*
+		# 벌크성 수정쿼리
+		- 쿼리 한번에 작업을 수행하는 것
+		- 벌크성 수정, 삭제 쿼리는 @Modifying 어노테이션을 사용
+		- 벌크성 쿼리를 실행하고 나서 영속성 컨텍스트 초기화: @Modifying(clearAutomatically = true) (이 옵션의 기본값은 false )
+		  이 옵션 없이 회원을 findById 로 다시 조회하면 영속성 컨텍스트에 과거 값이 남아서 문제가 될 수있다.
+		  만약 다시 조회해야 하면 꼭 영속성 컨텍스트를 초기화하자.
+	    - 벌크 연산은 영속성 컨텍스트를 무시하고 실행하기 때문에, 영속성 컨텍스트에 있는 엔티티의 상태와 DB에 엔티티 상태가 달라질 수 있다.
+
+		- 권장
+			1. 영속성 컨텍스트에 엔티티가 없는 상태에서 벌크 연산을 먼저 실행한다.
+			2. 부득이하게 영속성 컨텍스트에 엔티티가 있으면 벌크 연산 직후 영속성 컨텍스트를 초기화 한다.
+
+		@Modifying
+		@Transactional
+		@Query("update Member m set m.age = m.age + 1 where m.age >= :age")
+		int bulkAgePlus(@Param("age") int age);
+	 */
+
+	/*
+		# @EntityGraph
+
+		- 지연로딩 여부 확인 방법
+		//Hibernate 기능으로 확인
+		Hibernate.isInitialized(member.getTeam())
+
+		//JPA 표준 방법으로 확인
+		PersistenceUnitUtil util =
+		em.getEntityManagerFactory().getPersistenceUnitUtil();
+		util.isLoaded(member.getTeam());
+
+		- 연관된 엔티티를 한번에 조회하려면 페치 조인이 필요하다.
+			@Query("select m from Member m left join fetch m.team")
+			List<Member> findMemberFetchJoin();
+
+		- 스프링 데이터 JPA는 JPA가 제공하는 엔티티 그래프 기능을 편리하게 사용하게 도와준다.
+		- 이 기능을 사용하면 JPQL 없이 페치 조인을 사용할 수 있다. (JPQL + 엔티티 그래프도 가능)
+			//공통 메서드 오버라이드
+			@Override
+			@EntityGraph(attributePaths = {"team"})
+			List<Member> findAll();
+
+			//JPQL + 엔티티 그래프
+			@EntityGraph(attributePaths = {"team"})
+			@Query("select m from Member m")
+			List<Member> findMemberEntityGraph();
+
+			//메서드 이름 쿼리에서 특히 편리하다.
+			@EntityGraph(attributePaths = {"team"})
+			List<Member> findByUsername(String username)
+
+		- 사실상 페치 조인(FETCH JOIN)의 간편 버전
+		- LEFT OUTER JOIN 사용
+		- 간단한 경우 쓰면 좋다. (쿼리가 복잡할 경우엔 jpql 안에서 fetch join 을 쓸 수 밖에 없음)
+	 */
+
+	/*
+		# JPA Hint & Lock
+
+		- JPA Hint
+			- JPA 쿼리 힌트(SQL 힌트가 아니라 JPA 구현체에게 제공하는 힌트)
+		// 내부적으로 read only 모드로 인지 -> JPA는 엔티티가 1차 캐시에 저장될 때, 저장되는 시점의 상태를 스냅샷으로 만들어 1차 캐시에 보관하는데 스냅샷 자체를 안만든다.
+		@QueryHints(value = @QueryHint(name = "org.hibernate.readOnly", value = "true"))
+		Member findReadOnlyByUsername(String username);
+
+		@QueryHints(value = { @QueryHint(name = "org.hibernate.readOnly", value = "true")}, forCounting = true)
+		Page<Member> findByUsername(String name, Pageable pageable);
+
+		- org.springframework.data.jpa.repository.QueryHints 어노테이션을 사용
+		- forCounting : 반환 타입으로 Page 인터페이스를 적용하면 추가로 호출하는 페이징을 위한 count 쿼리도 쿼리 힌트 적용(기본값 true)
+
+		- Lock
+
+		@Lock(LockModeType.PESSIMISTIC_WRITE)
+		List<Member> findByUsername(String name); // select for update (비관적 락)
+
+		- org.springframework.data.jpa.repository.Lock 어노테이션을 사용
+		- JPA가 제공하는 락은 JPA 책 16.1 트랜잭션과 락 절을 참고
 
 	 */
 }
