@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +18,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(of = {"id, username, age"})
-public class Member {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Member extends BaseEntity {
 
 	@Id
 	@GeneratedValue

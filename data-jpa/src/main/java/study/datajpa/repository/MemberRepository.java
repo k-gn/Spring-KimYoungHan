@@ -2,13 +2,18 @@ package study.datajpa.repository;
 
 import java.util.List;
 
+import org.hibernate.query.NativeQuery;
+import org.hibernate.transform.Transformers;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import org.springframework.transaction.annotation.Transactional;
+
+import study.datajpa.dto.MemberDto;
 import study.datajpa.entity.Member;
 
 /*
@@ -60,7 +65,7 @@ import study.datajpa.entity.Member;
 
 	 스프링 데이터 JPA를 사용하면 실무에서 Named Query를 직접 등록해서 사용하는 일은 드물다. 대신 @Query 를 사용해서 리파지토리 메소드에 쿼리를 직접 정의한다.
  */
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
 
 	List<Member> findByUsername(String username);
 
@@ -241,4 +246,50 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 		- JPA가 제공하는 락은 JPA 책 16.1 트랜잭션과 락 절을 참고
 
 	 */
+
+	/*
+		### 네이티브 쿼리
+
+		- 가급적 네이티브 쿼리는 사용하지 않는게 좋음, 정말 어쩔 수 없을 때 사용 최근에 나온 궁극의 방법 스프링 데이터 Projections 활용
+
+		- 페이징 지원
+		- 반환 타입
+			1. Object[]
+			2. Tuple
+			3. DTO(스프링 데이터 인터페이스 Projections 지원)
+		- 제약
+			1. Sort 파라미터를 통한 정렬이 정상 동작하지 않을 수 있음(믿지 말고 직접 처리)
+			2. JPQL처럼 애플리케이션 로딩 시점에 문법 확인 불가
+			3. 동적 쿼리 불가
+
+		- JPQL은 위치 기반 파리미터를 1부터 시작하지만 네이티브 SQL은 0부터 시작
+		- 네이티브 SQL을 엔티티가 아닌 DTO로 변환은 하려면
+			DTO 대신 JPA TUPLE 조회
+			DTO 대신 MAP 조회
+			* Projections
+			네이티브 SQL을 DTO로 조회할 때는 JdbcTemplate or myBatis 권장
+
+		사실 제약이 많아서 따로 커스텀 레포지토리를 만든 후 JdbcTemplate or Mybatis 쓰는걸 권장한다.
+		그나마 정적쿼리인 경우 사용하자
+	 */
+	@Query(value = "select * from member where username = ?", nativeQuery = true)
+	Member findByNativeQuery(String username);
+
+	// Projections 활용 (JPA 네이티브 쿼리 + 인터페이스 기반 Projections 활용)
+	// @Query + paging (JPQL Paging)
+	@Query(value = "SELECT m.member_id as id, m.username, t.name as teamName " +
+		"FROM member m left join team t ON m.team_id = t.team_id",
+		countQuery = "SELECT count(*) from member",
+		nativeQuery = true)
+	Page<MemberProjection> findByNativeProjection(Pageable pageable);
+
+	// 동적 네이티브 쿼리 (하이버네이트를 직접 활용 / 스프링 JdbcTemplate, myBatis, jooq 등의 외부 라이브러리 사용)
+	// String sql = "select m.username as username from member m";
+	// List<MemberDto> result = em.createNativeQuery(sql)
+	// 	.setFirstResult(0)
+	// 	.setMaxResults(10)
+	// 	.unwrap(NativeQuery.class)
+	// 	.addScalar("username")
+	// 	.setResultTransformer(Transformers.aliasToBean(MemberDto.class))
+	// 	.getResultList();
 }

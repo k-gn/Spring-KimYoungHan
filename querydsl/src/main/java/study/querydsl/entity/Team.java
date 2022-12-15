@@ -1,4 +1,4 @@
-package study.datajpa.entity;
+package study.querydsl.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id, name"})
-public class Team extends BaseEntity {
+public class Team {
 
 	@Id
 	@GeneratedValue
@@ -44,4 +44,8 @@ public class Team extends BaseEntity {
 
 	@OneToMany(mappedBy = "team")
 	private List<Member> members = new ArrayList<>();
+
+	public Team(String name) {
+		this.name = name;
+	}
 }
