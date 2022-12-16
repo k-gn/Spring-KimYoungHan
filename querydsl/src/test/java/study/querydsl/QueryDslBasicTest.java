@@ -516,4 +516,5 @@ public class QueryDslBasicTest {
 		 - member.age.stringValue() 부분이 중요한데, 문자가 아닌 다른 타입들은 stringValue() 로
 		   문자로 변환할 수 있다. 이 방법은 ENUM을 처리할 때도 자주 사용한다.
 	 */
+
 }
