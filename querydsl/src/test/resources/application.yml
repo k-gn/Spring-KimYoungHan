@@ -1,6 +1,8 @@
 spring:
   profiles:
-    active: local
+    active: test # 이렇게 분리하면 main 소스코드와 테스트 소스 코드 실행시 프로파일을 분리할 수 있다.
+
+    # test 쪽에 yml 이 있으면 애를 본다.
 
   jpa:
     hibernate:

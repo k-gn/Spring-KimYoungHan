@@ -22,6 +22,11 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
+	/*
+		PK에는 Long(Wrapper Class) 을 사용한다
+		Wrapper Class 를 사용함으로써 Null을 대입해놓을 수 있는데, 명시적으로 PK가 아직 할당되지 않았음을 의미할수 있다.
+		반면 primivite type은 null 을 표시할 방법이 없다
+	 */
 	@Id
 	@GeneratedValue
 	@Column(name = "member_id")
@@ -29,6 +34,22 @@ public class Member {
 
 	private String username;
 
+	/*
+		- Primitive Type 의 장점
+			공유참조문제가 없다 (하지만 Wrapper Class 도 이뮤터블 객체이다 )
+			성능이 조금이라도 더 좋다 (아니 좋을것같다)
+			nullPointException 발생이 원천봉쇄된다
+
+		- Wrapper Class 사용의 장점
+			멀티스레드에서 사용할 수 있다
+			nullPointException 이 발생할수는 있지만 null 임을 표시할수 있다.
+			명시적으로 vaildataion 을 사용할 수 있다
+				- @NonNull, @NotNull.. 등등
+
+		Primitive Type vs Wrapper Class
+			가장 일반적인 구현체인 Hibernate의 문서를 보면 명시적으로 non-primitive type의 사용을 권장하고 있다.
+			판단기준은 Null을 원천봉쇄 하느냐 아니냐의 차이인데, 일부 필드에서 primitive Type 도 사용하고 있다.
+	 */
 	private int age;
 
 	@ManyToOne(fetch = FetchType.LAZY)
