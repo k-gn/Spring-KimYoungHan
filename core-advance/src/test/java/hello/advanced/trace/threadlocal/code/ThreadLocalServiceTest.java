@@ -27,7 +27,7 @@ class ThreadLocalServiceTest {
 		threadB.setName("thread-B");
 		threadA.start(); // A 실행
 		// sleep(2000); // 동시성 문제 발생 X
-		sleep(100); //동시성 문제 발생 O
+		sleep(100); //동시성 문제 발생 해결!
 		threadB.start(); // B 실행
 		sleep(3000); // 메인 쓰레드 종료 대기
 		log.info("main exit");

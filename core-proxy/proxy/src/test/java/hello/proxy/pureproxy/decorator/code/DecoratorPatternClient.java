@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DecoratorPatternClient {
 
-    private Component component;
+    public Component component;
 
     public DecoratorPatternClient(Component component) {
         this.component = component;
