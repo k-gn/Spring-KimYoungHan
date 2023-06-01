@@ -25,6 +25,7 @@ public class UnCheckedAppTest {
             controller.request();
         } catch (Exception e) {
 //            e.printStackTrace();
+            // 실무에선 로그를 활용하자.
             log.info("ex", e);
         }
 
@@ -60,6 +61,7 @@ public class UnCheckedAppTest {
             try {
                 runSQL();
             } catch (SQLException e) {
+                // 예외를 전환할 땐 꼭 기존에 발생한 예외(e)를 포함시켜주자.
                 throw new RuntimeSQLException(e);
             }
         }

@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
+/*
+    - 기본적으로 언체크 예외를 사용하자.
+    - 체크 예외는 비즈니스 로직상 의도적으로 던지는 예외에만 사용하자.
+        - 해당 예외를 반드지 처리해야 하는 문제인 경우 사용
+        - ex. 계좌 이체 실패 / 결제 포인트 부족 / 로그인 정보 불일치 등등 */
 @Slf4j
 public class UncheckedTest {
 

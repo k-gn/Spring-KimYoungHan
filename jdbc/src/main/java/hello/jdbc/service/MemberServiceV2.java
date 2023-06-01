@@ -21,6 +21,7 @@ public class MemberServiceV2 {
     private final MemberRepositoryV2 memberRepository;
 
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
+        // V2 는 JDBC 기술에 의존하고 있어 향 후 다른 기술로 바꾸게 된다면 대부분의 코드를 손봐야한다. -> 유지보수 어렵다.
         Connection con = dataSource.getConnection();
         try {
             con.setAutoCommit(false);//트랜잭션 시작

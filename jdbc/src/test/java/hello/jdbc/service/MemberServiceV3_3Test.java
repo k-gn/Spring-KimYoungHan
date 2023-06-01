@@ -42,6 +42,9 @@ class MemberServiceV3_3Test {
 
     @TestConfiguration
     static class TestConfig {
+
+        // DataSource, transactionManager는 yml/properties에 설정 시 자동으로 알아서 스프링 부트가 등록해준다.
+        // 따로 개발자가 직접 빈 등록 시 스프링 부트는 자동 등록하지 않음 (전체적인 매커니즘)
         @Bean
         DataSource dataSource() {
             return new DriverManagerDataSource(URL, USERNAME, PASSWORD);

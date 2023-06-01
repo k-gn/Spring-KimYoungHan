@@ -14,6 +14,13 @@ import java.sql.SQLException;
 
 /**
  * 트랜잭션 - 트랜잭션 템플릿
+ *
+ * 반복로직 문제 해결
+ * 하지만 아직 서비스 로직인데 비즈니스 로직 뿐만 아니라 트랜잭션 기술 로직이 함께 남아있다.
+ * 핵심기능인 비즈니스 로직과 부가기능인 트랜잭션이 한 곳에 있다는 것은 두가지 관심사를 한 클래스에서 처리한다는 것이다.
+ * 결과적으로 유지보수가 어려운 코드가 된다.
+ *
+ * 어떻게 해결할 수 있을까? => AOP
  */
 @Slf4j
 public class MemberServiceV3_2 {
@@ -26,7 +33,7 @@ public class MemberServiceV3_2 {
         this.memberRepository = memberRepository;
     }
 
-    public void accountTransfer(String fromId, String toId, int money) throws SQLException {
+    public void accountTransfer(String fromId, String toId, int money) {
         txTemplate.executeWithoutResult((status) -> {
             //비즈니스 로직
             try {

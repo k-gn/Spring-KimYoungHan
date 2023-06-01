@@ -8,6 +8,13 @@ import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.*;
 
+/*
+    # 체크 예외 문제점
+        - 예외에 대한 throws 의존성
+        - 비즈니스 로직에서 복구/처리 불가능
+        - throws Exception 은 절대 쓰지 말것 (중요한 예외도 전부 놓치게 된다.)
+        => 런타임 예외로 해결 (단, 런타임 예외는 문서화/명시가 중요하다.)
+ */
 public class CheckedAppTest {
 
     @Test

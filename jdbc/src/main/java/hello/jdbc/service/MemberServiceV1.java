@@ -16,6 +16,7 @@ public class MemberServiceV1 {
         Member fromMember = memberRepository.findById(fromId);
         Member toMember = memberRepository.findById(toId);
 
+        // 트랜잭션이 없어 auto commit 으로 돈다. -> 롤백이 안됨
         memberRepository.update(fromId, fromMember.getMoney() - money);
         validation(toMember);
         memberRepository.update(toId, toMember.getMoney() + money);
