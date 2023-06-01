@@ -48,6 +48,7 @@ public class ExTranslatorV1Test {
                 repository.save(new Member(memberId, 0));
                 log.info("saveId={}", memberId);
             } catch (MyDuplicateKeyException e) {
+                // 이렇게 복구시도를 할 수 있다.
                 log.info("키 중복, 복구 시도");
                 String retryId = generateNewId(memberId);
                 log.info("retryId={}", retryId);
@@ -82,6 +83,8 @@ public class ExTranslatorV1Test {
                 return member;
             } catch (SQLException e) {
                 //h2 db
+                //문제 1. 데이터베이스 마다 코드가 다른데 어떡할까?
+                //문제 2. 다양한 예외들이 있는데 전부 만들어야 할까?
                 if (e.getErrorCode() == 23505) {
                     throw new MyDuplicateKeyException(e);
                 }
