@@ -141,7 +141,7 @@ class MemberServiceTest {
      * memberRepository @Transactional:ON
      * logRepository    @Transactional:ON(REQUIRES_NEW) Exception
      *
-     * REQUIRES_NEW 때문에 별도의 트랜잭션 영역으로 분리된다.
+     * REQUIRES_NEW 때문에 별도의 물리 트랜잭션 영역으로 분리된다.
      */
     @Test
     void recoverException_success() {
