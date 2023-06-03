@@ -17,6 +17,14 @@ import java.util.Optional;
 @Transactional
 public class ItemServiceV2 implements ItemService {
 
+    /*
+        - 스프링 데이터 JPA 기능을 최대한 살리면서, Querydsl도 편리하게 사용할 수 있는 구조. (빠르고 실용적인 구조)
+            기본적인 CRUD, 단순 쿼리는 스프링 데이터 JPA가 담당하고
+            복잡한 조회 쿼리는 Querydsl이 담당하는 구조.
+            너무 복잡하다면 jdbcTemplate or mybatis 를 함께 사용 (거의 5% 미만)
+
+        - JpaTransactionManager 만 있어도 jdbcTemplate, mybatis 모두를 하나의 트랜잭션으로 묶어 사용할 수 있다.
+     */
     private final ItemRepositoryV2 itemRepositoryV2;
     private final ItemQueryRepositoryV2 itemQueryRepositoryV2;
 

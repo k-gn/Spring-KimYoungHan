@@ -90,6 +90,7 @@ public class JpaItemRepositoryV3 implements ItemRepository {
                 .fetch();
     }
 
+    // 재사용성이 올라감
     private BooleanExpression likeItemName(String itemName) {
         if (StringUtils.hasText(itemName)) {
             return item.itemName.like("%" + itemName + "%");
