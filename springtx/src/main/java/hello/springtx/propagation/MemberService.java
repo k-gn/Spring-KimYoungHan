@@ -13,6 +13,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final LogRepository logRepository;
 
+    // 트랜잭션 AOP도 내부에서 트랜잭션 매니저를 사용한다. (대신 호출해주는 것)
     @Transactional
     public void joinV1(String username) {
         Member member = new Member(username);
@@ -40,6 +41,7 @@ public class MemberService {
         try {
             logRepository.save(logMessage);
         } catch (RuntimeException e) {
+            // 복구 로직
             log.info("log 저장에 실패했습니다. logMessage={}", logMessage.getMessage());
             log.info("정상 흐름 반환");
         }
