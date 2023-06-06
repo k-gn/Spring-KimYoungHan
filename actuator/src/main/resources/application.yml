@@ -4,19 +4,26 @@ management:
       exposure:
         include: "*"
         exclude:
-          - health
           - beans
           - quartz
-  endpoint:
-    shutdown:
-      enabled: true
-    beans:
-      enabled: false
-    health:
-      enabled: false
-    caches:
-      enabled: true
-    loggers:
-      enabled: true
-    quartz:
-      enabled: false
+      cors:
+        allowed-origins: https://test.com
+        allowed-methods: GET
+
+#  endpoint:
+#    shutdown:
+#      enabled: true
+#      cache:
+#        time-to-live: 10s
+#    beans:
+#      enabled: false
+#    health:
+#      enabled: true
+#      cache:
+#        time-to-live: 1d
+#    caches:
+#      enabled: true
+#    loggers:
+#      enabled: true
+#    quartz:
+#      enabled: false
