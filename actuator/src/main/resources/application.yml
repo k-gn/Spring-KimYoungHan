@@ -1,0 +1,22 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude:
+          - health
+          - beans
+          - quartz
+  endpoint:
+    shutdown:
+      enabled: true
+    beans:
+      enabled: false
+    health:
+      enabled: false
+    caches:
+      enabled: true
+    loggers:
+      enabled: true
+    quartz:
+      enabled: false
