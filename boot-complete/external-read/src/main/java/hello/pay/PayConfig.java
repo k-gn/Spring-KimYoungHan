@@ -9,6 +9,11 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class PayConfig {
 
+    /*
+        # @Profile
+         - 환경에 따라 서로 다른 빈을 등록해줄 수 있다.
+         - 내부적으로 @Conditional 사용
+     */
     @Bean
     @Profile("default")
     public LocalPayClient localPayClient() {

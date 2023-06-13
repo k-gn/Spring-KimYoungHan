@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 @Slf4j
+// 아래 설정을 추가해야 @ConfigurationProperties bean 사용 가능
 @EnableConfigurationProperties(MyDataSourcePropertiesV1.class)
 public class MyDataSourceConfigV1 {
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class OrderRunner implements ApplicationRunner {
+public class OrderRunner implements ApplicationRunner { // 스프링이 뜰 때 호출하는 실행 코드
 
     private final OrderService orderService;
 

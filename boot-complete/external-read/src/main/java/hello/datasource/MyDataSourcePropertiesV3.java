@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import java.time.Duration;
 import java.util.List;
 
+// 들어오는 설정 값을 검증
 @Getter
 @ConfigurationProperties("my.datasource")
 @Validated

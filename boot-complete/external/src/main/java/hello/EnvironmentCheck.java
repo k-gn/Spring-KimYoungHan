@@ -55,6 +55,9 @@ public class EnvironmentCheck {
 
         # 설정 데이터 우선순위
         - 내부 properties < 내부 profile properties < 외부 properties
+
+        - 내부 설정 데이터를 사용하다가 일부 속성을 변경할 필요가 있다면 더 높은 우선순위의 설정을 사용하면 된다.
+            - 유연한 구조가 되었다!
      */
     private final Environment env;
 
