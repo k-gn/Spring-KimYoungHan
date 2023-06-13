@@ -9,6 +9,11 @@ public class JavaSystemProperties {
 
     public static void main(String[] args) {
 
+        /*
+            # 자바 시스템 속성
+            - 실행한 JVM 안에서 접근 가능한 외부 설정
+            - "-D" VM 옵션을 통해 key=value 형식을 주면 된다.
+         */
         Properties properties = System.getProperties();
         for (Object key : properties.keySet()) {
             log.info("prop {}={}", key, System.getProperty(String.valueOf(key)));

@@ -12,6 +12,9 @@ import java.util.Set;
 @Component
 public class CommandLineBean {
 
+    /*
+        - 스프링 부트는 ApplicationArguments 를 빈으로 등록해두기 때문에 그냥 가져와서 사용할 수 있다.
+     */
     private final ApplicationArguments arguments;
 
     public CommandLineBean(ApplicationArguments arguments) {
