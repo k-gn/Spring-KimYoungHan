@@ -1,23 +1,24 @@
 management:
-  info:
+  info: # 애플리케이션 정보
     java:
       enabled: true
     os:
       enabled: true
-    env:
+    env: # info 하위에 설정을 드러냄
       enabled: true
   server:
     port: 8080
-  endpoint:
+  endpoint: # 개별 속성 detail
     shutdown:
-      enabled: true
+      enabled: true # 활성화
     health:
       show-components: always
       #show-details: always
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: "*" # 기능 노출
+        # exclude: "env, bean"
 
 info:
   app:
