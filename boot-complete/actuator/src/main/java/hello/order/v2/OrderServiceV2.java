@@ -11,7 +11,7 @@ public class OrderServiceV2 implements OrderService {
 
     private AtomicInteger stock = new AtomicInteger(100);
 
-    @Counted("my.order")
+    @Counted("my.order") // AOP 를 활용하여 카운터를 쉽게 동작시킬 수 있다.
     @Override
     public void order() {
         log.info("주문");

@@ -13,6 +13,7 @@ public class StockConfigV2 {
 
     @Bean
     public MeterBinder stockSize(OrderService orderService) {
+        // 게이지 등록 (간단편)
         return registry -> Gauge.builder("my.stock", orderService, service -> {
             log.info("stock gauge call");
             return service.getStock().get();

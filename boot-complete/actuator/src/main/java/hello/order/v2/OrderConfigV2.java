@@ -14,6 +14,7 @@ public class OrderConfigV2 {
         return new OrderServiceV2();
     }
 
+    // 카운터 관련 AOP 동작 설정
     @Bean
     public CountedAspect countedAspect(MeterRegistry registry) {
         return new CountedAspect(registry);

@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Timed("my.order")
+@Timed("my.order") // 클래스에 지정
 @Slf4j
 public class OrderServiceV4 implements OrderService {
 
